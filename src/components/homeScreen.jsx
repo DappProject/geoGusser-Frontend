@@ -84,7 +84,7 @@ function HomeScreen() {
         setLoading(false);
         const { mapsUrl, streetViewUrl, latitude, longitude, city, location } =
           response.data;
-        const imageUrl = `http://localhost:8000/public/${response.data.filePath.filename}`;
+        const imageUrl = `https://geo-gusser.vercel.app/public/${response.data.filePath.filename}`;
         console.log(imageUrl);
         navigate("/map", {
           state: {

@@ -52,7 +52,7 @@ const Map = () => {
       });
       const {  mapsUrl, streetViewUrl, latitude, longitude, location, filePath } = response.data;
       console.log(response.data)
-      const imageUrl = `http://localhost:8000/public/${filePath.filename}`
+      const imageUrl = `https://geo-gusser.vercel.app/public/${filePath.filename}`
       setStreetViewUrl(streetViewUrl);
       setMapsUrl(mapsUrl);
       setlImageLocation(location);
