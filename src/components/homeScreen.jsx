@@ -75,7 +75,7 @@ function HomeScreen() {
       return;
     }
     try {
-      const response = await axios.post("/api/v1/geoGuess/search", formData, {
+      const response = await axios.post("https://geo-gusser.vercel.app/api/v1/geoGuess/search", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
