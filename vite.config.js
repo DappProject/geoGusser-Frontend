@@ -7,8 +7,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://geo-gusser.vercel.app',
+        target: 'https://geo-gusser.vercel.app',  // Your backend URL
+        changeOrigin: true,  // This helps with cross-origin requests
+        secure: false,  // If using HTTP (ensure you set it to `true` for HTTPS)
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
-  },
+  }
+  
 })
