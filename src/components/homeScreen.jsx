@@ -115,22 +115,21 @@ function HomeScreen() {
         <div className={`absolute z-20 inset-0 items-center justify-center bg-black bg-opacity-30 ${showModal ? "flex" : "hidden"}`}>
           <div className="bg-white rounded-lg shadow-lg p-6 w-96 h-96">
             <h1 className="text-2xl font-semibold text-center mb-4">
-              <span className="text-blue-600">Geo</span>Spy
+              <span className="text-blue-600">Geo</span>Scope
             </h1>
             <h2 className="text-lg font-medium text-gray-700 text-center mb-4">
-              Welcome to Superbolt
+              Welcome to GeoScope
             </h2>
             <p className="text-sm text-gray-600 text-center mb-6">
-              Experience our new AI model for precise street-level photo
-              geolocation. While this demo showcases San Francisco, SuperBolt's
-              technology can be deployed in any city worldwide.
+              
+Discover the power of our cutting-edge AI model for pinpointing street-level photo geolocation. This demo highlights San Francisco, but Geoscope innovative technology is adaptable to any city across the globe.
             </p>
             <div className="space-y-3">
               <button className="w-full py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg shadow-md" onClick={()=>{ setShowSampleModal(true)}}>
                 📸 Try Example Images
               </button>
               <button className="w-full py-2 px-4 bg-black text-white rounded-lg shadow-md hover:bg-gray-900" onClick={()=>setShowModal(false)}>
-                Try Superbolt →
+                Try GeoScope →
               </button>
             </div>
           </div>
