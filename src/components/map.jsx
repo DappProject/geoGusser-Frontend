@@ -58,25 +58,16 @@ const Map = () => {
     Array.from(files).forEach((file) => formData.append("file", file));
     console.log(files);
     try {
-      const response = await axios.post(
-        "http://45.154.98.112:8000/api/v1/geoGuess/search",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      const {
-        mapsUrl,
-        streetViewUrl,
-        latitude,
-        longitude,
-        location,
-        filePath,
-      } = response.data;
-      console.log(response.data);
-      const imageUrl = `http://45.154.98.112:8000/public/${filePath.filename}`;
+
+      const response = await axios.post("http://45.154.98.112:8000/api/v1/geoGuess/search", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const {  mapsUrl, streetViewUrl, latitude, longitude, location, filePath } = response.data;
+      console.log(response.data)
+      const imageUrl = `http://45.154.98.112:8000/public/${filePath.filename}`
+
       setStreetViewUrl(streetViewUrl);
       setMapsUrl(mapsUrl);
       setlImageLocation(location);

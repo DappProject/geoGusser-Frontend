@@ -75,7 +75,9 @@ function HomeScreen() {
       return;
     }
     try {
-      const response = await axios.post("http://45.154.98.112:8000//api/v1/geoGuess/search", formData, {
+
+      const response = await axios.post("http://45.154.98.112:8000/api/v1/geoGuess/search", formData, {
+
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -84,7 +86,9 @@ function HomeScreen() {
         setLoading(false);
         const { mapsUrl, streetViewUrl, latitude, longitude, city, location } =
           response.data;
-        const imageUrl = `http://45.154.98.112:8000//public/${response.data.filePath.filename}`;
+
+        const imageUrl = `http://45.154.98.112:8000/public/${response.data.filePath.filename}`;
+
         console.log(imageUrl);
         navigate("/map", {
           state: {
