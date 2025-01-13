@@ -75,7 +75,7 @@ function HomeScreen() {
       return;
     }
     try {
-      const response = await axios.post("/api/v1/geoGuess/search", formData, {
+      const response = await axios.post("http://45.154.98.112:8000//api/v1/geoGuess/search", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -84,7 +84,7 @@ function HomeScreen() {
         setLoading(false);
         const { mapsUrl, streetViewUrl, latitude, longitude, city, location } =
           response.data;
-        const imageUrl = `https://geo-gusser.vercel.app/public/${response.data.filePath.filename}`;
+        const imageUrl = `http://45.154.98.112:8000//public/${response.data.filePath.filename}`;
         console.log(imageUrl);
         navigate("/map", {
           state: {
@@ -108,27 +108,26 @@ function HomeScreen() {
         <img
           src={img}
           alt=""
-          className="h-full object-cover cursor-pointer relative opacity-90"
+          className="h-full w-full object-cover cursor-pointer relative opacity-80"
           draggable="false"
         />
 
         <div className={`absolute z-20 inset-0 items-center justify-center bg-black bg-opacity-30 ${showModal ? "flex" : "hidden"}`}>
-          <div className="bg-white rounded-lg shadow-lg p-6 w-96 h-96">
+          <div className="bg-white rounded-lg shadow-lg p-6 sm:w-96 w-64 sm:h-96">
             <h1 className="text-2xl font-semibold text-center mb-4">
               <span className="text-blue-600">Geo</span>Scope
             </h1>
             <h2 className="text-lg font-medium text-gray-700 text-center mb-4">
               Welcome to GeoScope
             </h2>
-            <p className="text-sm text-gray-600 text-center mb-6">
-              
-Discover the power of our cutting-edge AI model for pinpointing street-level photo geolocation. This demo highlights San Francisco, but Geoscope innovative technology is adaptable to any city across the globe.
+            <p className="sm:text-sm text-xs text-gray-600 text-center mb-6">
+              Discover the power of our cutting-edge AI model for pinpointing street-level photo geolocation. This demo highlights San Francisco, but Geoscope innovative technology is adaptable to any city across the globe.
             </p>
             <div className="space-y-3">
-              <button className="w-full py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg shadow-md" onClick={()=>{ setShowSampleModal(true)}}>
+              <button className="w-full sm:py-2 py-1 sm:px-4 px-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg shadow-md sm:text-base text-sm" onClick={()=>{ setShowSampleModal(true)}}>
                 📸 Try Example Images
               </button>
-              <button className="w-full py-2 px-4 bg-black text-white rounded-lg shadow-md hover:bg-gray-900" onClick={()=>setShowModal(false)}>
+              <button className="w-full sm:py-2 py-1 sm:px-4 px-2 sm:text-base text-sm bg-black text-white rounded-lg shadow-md hover:bg-gray-900" onClick={()=>setShowModal(false)}>
                 Try GeoScope →
               </button>
             </div>
@@ -136,9 +135,9 @@ Discover the power of our cutting-edge AI model for pinpointing street-level pho
         </div>
 
         <div className={`absolute z-20 inset-0 flex items-center justify-center bg-black bg-opacity-30 ${showSampleModal? "flex" : "hidden"}`}>
-        <div className="bg-white rounded-lg shadow-lg p-6 w-[50rem]">
+        <div className="bg-white rounded-lg shadow-lg sm:p-6 p-2 m-1 sm:w-[50rem] w-[40rem]">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-medium text-gray-700">
+            <h2 className="sm:text-xl text-sm font-medium text-gray-700">
               Try Example Images
             </h2>
             <button
@@ -149,24 +148,24 @@ Discover the power of our cutting-edge AI model for pinpointing street-level pho
               ✕
             </button>
           </div>
-          <p className="text-sm text-gray-600 text-center mb-6">
+          <p className="sm:text-sm text-xs text-gray-600 text-center mb-6">
             Click any example to see how Street Search works with different
             types of images
           </p>
-          <div className="flex gap-4">
+          <div className="flex sm:gap-4 gap-1">
             {/* High Context Example */}
-            <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl w-1/3 cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage1)}}> 
+            <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl sm:w-1/3 w-1/2 cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage1)}}> 
               <img
                 src={sampleImage1}
                 alt="High Context Example"
-                className="rounded-t-md mb-3 h-48 w-full"
+                className="rounded-t-md msm:b-3 mb-1 sm:h-48 h-[110px] w-full"
                 draggable="false"
               />
               <div className="p-2">
-                <h3 className="text-sm font-semibold text-gray-800 mb-2 text-center">
+                <h3 className=" sm:text-sm text-xs font-semibold text-gray-800 sm:mb-2 mb-1 sm:text-center">
                   🏛 High Context Example
                 </h3>
-                <p className="text-base text-gray-600">
+                <p className="sm:text-sm text-[11px] leading-3 tracking-tight text-gray-600">
                   Clear view of buildings, streets, and landmarks - ideal for
                   accurate location matching
                 </p>
@@ -175,19 +174,19 @@ Discover the power of our cutting-edge AI model for pinpointing street-level pho
             </div>
 
             {/* Low Context Example */}
-            <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl w-1/3 cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage2)}}>
+            <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl sm:w-1/3 w-1/2 cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage2)}}>
               <img
                 src={sampleImage2}
                 alt="Low Context Example"
-                className="rounded-t-md mb-3 h-48 w-full"
+                className="rounded-t-md sm:mb-3 mb-1 sm:h-48 h-[110px] w-full"
                 draggable="false"
               />
               <div className="p-2">
 
-              <h3 className="text-sm font-semibold text-gray-800 mb-2 text-center">
+              <h3 className="sm:text-sm text-xs font-semibold text-gray-800 sm:mb-2 mb-1 sm:text-center">
                 🔍 Low Context Example
               </h3>
-              <p className="text-base text-gray-600">
+              <p className="sm:text-sm text-[11px] leading-3 tracking-tight text-gray-600">
                 Limited architectural features but still contains recognizable
                 elements
               </p>
@@ -195,19 +194,19 @@ Discover the power of our cutting-edge AI model for pinpointing street-level pho
             </div>
 
             {/* Night Scene Example */}
-            <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl  w-1/3 cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage3)}} >
+            <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl sm:w-1/3 w-1/2  cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage3)}} >
               <img
                 src={sampleImage3}
                 alt="Night Scene Example"
-                className="rounded-md mb-3 h-48 w-full"
+                className="rounded-t-md sm:mb-3 mb-1 sm:h-48 h-[110px] w-full"
                 draggable="false"
               />
               <div className="p-2">
 
-              <h3 className="text-sm font-semibold text-gray-800 mb-2 text-center">
+              <h3 className="sm:text-sm text-xs font-semibold text-gray-800 sm:mb-2 mb-1 sm:text-center">
                 🌙 Night Scene Example
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="sm:text-sm text-[11px] leading-3 tracking-tight text-gray-600">
                 Night time image showing how lighting conditions affect
                 recognition
               </p>
@@ -218,7 +217,7 @@ Discover the power of our cutting-edge AI model for pinpointing street-level pho
       </div>
 
         {loading ? (
-          <div className="absolute top-[50%] left-[40%] flex items-center justify-center rounded-full p-4 bg-white shadow-md cursor-pointer">
+          <div className="absolute sm:top-[45%] top-[45%] sm:left-[44%] left-[26%] flex items-center justify-center rounded-full sm:p-4 p-2 bg-white shadow-md cursor-pointer">
             <Box
               sx={{
                 display: "flex",
@@ -232,13 +231,11 @@ Discover the power of our cutting-edge AI model for pinpointing street-level pho
             </Box>
           </div>
         ) : (
-          <form action="" className="absolute z-10 top-[50%] left-[40%]">
+          <form action="" className="absolute z-10 sm:top-[50%] top-[45%] sm:left-[40%] left-[10%]">
             {/* <input type="file" name="file" id="" placeholder='Tap, or Drag & drop outdoor images' className=''/> */}
 
             <div
-              className={`flex items-center justify-center border ${
-                highlight ? "border-blue-500" : "border-gray-300"
-              } rounded-full p-4 bg-white shadow-md cursor-pointer`}
+              className={`flex items-center justify-center border ${highlight ? "outline outline-blue-400": "outline-none"} rounded-full py-4 sm:px-8 px-4 bg-white shadow-md cursor-pointer`}
               onDragEnter={handleDragEnter}
               onDragOver={(e) => e.preventDefault()}
               onDragLeave={handleDragLeave}
