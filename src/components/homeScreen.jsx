@@ -6,6 +6,7 @@ import { Box, CircularProgress } from "@mui/material";
 import sampleImage1 from "../assets/sampleImage1.jpeg"
 import sampleImage2 from "../assets/sampleImage2.jpg"
 import sampleImage3 from "../assets/sampleImage3.jpg"
+import CustomMap from "./CustomMap.jsx";
 
 function HomeScreen() {
   const [highlight, setHighlight] = useState(false);
@@ -109,12 +110,13 @@ function HomeScreen() {
   return (
     <>
       <div className="h-screen w-full bg-black ">
-        <img
+        {/* <img
           src={img}
           alt=""
           className="h-full w-full object-cover cursor-pointer relative opacity-80"
           draggable="false"
-        />
+        /> */}
+        <CustomMap/>
 
         <div className={`absolute z-20 inset-0 items-center justify-center bg-black bg-opacity-30 ${showModal ? "flex" : "hidden"}`}>
           <div className="bg-white rounded-lg shadow-lg p-6 sm:w-96 w-64 sm:h-96">
@@ -157,7 +159,7 @@ function HomeScreen() {
             types of images
           </p>
           <div className="flex sm:gap-4 gap-1">
-            {/* High Context Example */}
+            
             <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl sm:w-1/3 w-1/2 cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage1)}}> 
               <img
                 src={sampleImage1}
@@ -177,7 +179,7 @@ function HomeScreen() {
               
             </div>
 
-            {/* Low Context Example */}
+
             <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl sm:w-1/3 w-1/2 cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage2)}}>
               <img
                 src={sampleImage2}
@@ -197,7 +199,7 @@ function HomeScreen() {
               </div>
             </div>
 
-            {/* Night Scene Example */}
+
             <div className="flex flex-col items-center bg-gray-100 rounded-lg shadow-xl sm:w-1/3 w-1/2  cursor-pointer" onClick={()=>{setShowSampleModal(false); setShowModal(false); handleFileChange(sampleImage3)}} >
               <img
                 src={sampleImage3}
@@ -236,7 +238,6 @@ function HomeScreen() {
           </div>
         ) : (
           <form action="" className="absolute z-10 sm:top-[50%] top-[45%] sm:left-[40%] left-[10%]">
-            {/* <input type="file" name="file" id="" placeholder='Tap, or Drag & drop outdoor images' className=''/> */}
 
             <div
               className={`flex items-center justify-center border ${highlight ? "outline outline-blue-400": "outline-none"} rounded-full py-4 sm:px-8 px-4 bg-white shadow-md cursor-pointer`}

@@ -5,12 +5,14 @@ import App from './App.jsx'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import HomeScreen from './components/homeScreen.jsx'
 import Map from './components/map.jsx'
+import LandingPage from './components/landingPage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
     <Route path='/' element={<App/>}>
-      <Route index element={<HomeScreen/>} />
+    <Route index element={<LandingPage/>}/>
+      <Route path='/homeScreen' element={<HomeScreen/>} />
       <Route path="map" element={<Map/>} />
     </Route>
     </>

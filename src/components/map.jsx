@@ -5,6 +5,7 @@ import axios from "axios";
 import { FaRegMap } from "react-icons/fa";
 import { MdOutlineStreetview } from "react-icons/md";
 import { Box, CircularProgress } from "@mui/material";
+import CustomMap from "./CustomMap.jsx";
 
 const Map = () => {
   const location = useLocation();
@@ -85,7 +86,7 @@ const Map = () => {
 
   return (
     <div className="container mx-auto flex items-center h-full w-full">
-      <div className="absolute sm:left-0 top-0 z-10 m-3 rounded-xl sm:h-[90%] sm:w-80 w-[90%] md:self-auto self-center bg-[#ffffff]">
+      <div className="absolute sm:left-0 top-0 z-10 m-3 rounded-xl sm:h-[90%] sm:w-80 w-[90%] md:self-auto self-center bg-gray-700">
         <form>
           <div
             className={`flex items-center justify-center rounded-xl py-2 border bg-white shadow-md cursor-pointer m-2 ${highlight ? "outline outline-blue-400": "outline-none"}`}
@@ -128,18 +129,18 @@ const Map = () => {
           </div>
         </form>
         <div className="h-64 m-5 sm:block hidden">
-          <img src={file} alt="image" className="h-full w-full rounded-xl " />
+          <img src={file} alt="image" className="h-full w-full rounded-xl text-white" />
         </div>
         <div className="p-3 rounded-xl w-full">
-          <div className="bg-white p-2 sm:block hidden">
-            <h1 className="text-lg font-semibold text-gray-500">Location:</h1>
-            <h1 className="text-lg font-semibold">{imageLocation || "N/A"}</h1>
+          <div className=" p-2 sm:block hidden">
+            <h1 className="text-lg font-semibold text-gray-300">Location:</h1>
+            <h1 className="text-lg font-semibold text-white">{imageLocation || "N/A"}</h1>
           </div>
-          <div className="bg-white mt-7 p-2">
-            <h1 className="text-lg font-semibold text-gray-500">Latitude:</h1>
-            <h1 className="font-semibold">{latitude || "N/A"}</h1>
-            <h1 className="text-lg font-semibold text-gray-500">Longitude:</h1>
-            <h1 className="font-semibold">{longitude || "N/A"}</h1>
+          <div className=" mt-7 p-2">
+            <h1 className="text-lg font-semibold text-gray-300">Latitude:</h1>
+            <h1 className="font-semibold text-white">{latitude || "N/A"}</h1>
+            <h1 className="text-lg font-semibold text-gray-300">Longitude:</h1>
+            <h1 className="font-semibold text-white">{longitude || "N/A"}</h1>
           </div>
         </div>
       </div>
