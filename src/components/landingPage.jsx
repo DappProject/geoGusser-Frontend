@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import landingPageImage from "../assets/landingPageImage.jpg";
+import SolutionImage from "../assets/bgimage.gif";
 import { GoDatabase } from "react-icons/go";
 import { BsCpu } from "react-icons/bs";
 import { IoMdFingerPrint } from "react-icons/io";
@@ -7,263 +8,367 @@ import { FaChevronRight } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LocomotiveScroll from "locomotive-scroll";
+import "locomotive-scroll/dist/locomotive-scroll.css";
 import { useNavigate } from "react-router-dom";
+import MouseCircle from "./MouseCircle";
+import Navbar from "./Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
-
 function LandingPage() {
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+  const containerRef = useRef(null);
+  const headingRef = useRef(null);
+  const paraRef = useRef(null);
+  const buttonRef = useRef(null);
+  const backgroundRef = useRef(null);
+
+
+  useEffect(() => {
+
+    const tl = gsap.timeline({ defaults: { transformStyle: "preserve-3d" } });
+
+    tl.fromTo(
+      headingRef.current,
+      {
+        opacity: 0.5,
+        z: 450, // Start position in the Z-axis
+        transformPerspective: 1500, // Perspective for 3D effect
+      },
+      {
+        opacity: 1,
+        z: 0, // End position in the Z-axis
+        duration: 2,
+        ease: "power2.out",
+        stagger: 0.2
+      }
+    ).fromTo(
+      paraRef.current,
+      {
+        opacity: 0,
+        y: 50, // Slight Y-axis movement
+        z: 150, // Start position in the Z-axis
+        transformPerspective: 1000,
+      },
+      {
+        opacity: 1,
+        y: 0, // End position in the Y-axis
+        z: 0, // End position in the Z-axis
+        duration: 2,
+        ease: "power2.out",
+      },
+      "-=02" // Overlap the animations
+    );
+    // Hover effect for the button
+    buttonRef.current.addEventListener("mouseenter", () => {
+      gsap.to(buttonRef.current, { scale: 1.2, duration: 0.2 });
+    });
+
+    buttonRef.current.addEventListener("mouseleave", () => {
+      gsap.to(buttonRef.current, { scale: 1, duration: 0.2 });
+    });
+
+    // Cleanup event listeners
+  }, []);
+
+  const handleButtonClick = () => {
+    navigate("/homeScreen");
+  };
+
+
+  useEffect(() => {
+    // Initialize Locomotive Scroll
+    const scrollInstance = new LocomotiveScroll({
+      el: containerRef.current,
+      smooth: true,
+      smoothMobile: true,
+    });
+
+    // Sync Locomotive Scroll with GSAP ScrollTrigger
+    ScrollTrigger.scrollerProxy(containerRef.current, {
+      scrollTop(value) {
+        return arguments.length
+          ? scrollInstance.scrollTo(value, 0, 0)
+          : scrollInstance.scroll.instance.scroll.y;
+      },
+      getBoundingClientRect() {
+        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+      },
+    });
+
+
+  }, []);
 
   return (
     <>
-      <div className="scroll-section relative min-h-screen bg-black text-white">
-        {/* Navbar */}
-        {/* <nav className="flex justify-between items-center px-8 py-4">
-        <div className="text-xl font-bold">EQT LAB</div>
-        <div className="flex items-center gap-6">
-          <ul className="flex space-x-6 text-sm">
-            <li className="cursor-pointer">Overview</li>
-            <li className="cursor-pointer">Technology</li>
-            <li className="cursor-pointer">Testimonials</li>
-            <li className="cursor-pointer">Resources</li>
-          </ul>
-          <button className="px-4 py-2 text-sm bg-transparent border border-white rounded-md hover:bg-white hover:text-black">
-            Log In
-          </button>
-          <button className="px-4 py-2 text-sm bg-white text-black rounded-md hover:bg-gray-200">
-            Get Started
-          </button>
-        </div>
-      </nav> */}
+      {/* <AnimatedText/> */}
+      <Navbar />
+      <MouseCircle/>
 
-        {/* Main Hero Section */}
-        <section id="section1" className="min-h-[100vh] w-full flex flex-col justify-center items-center">
-          <div className="h-[100vh] w-full relative flex flex-col items-center justify-center text-center px-4">
-            {/* Background Glow */}
-            <div className="h-full w-full absolute top-1/2 transform -translate-y-1/2 left-0 right-0 flex justify-center">
-              <img src={landingPageImage} className="w-full h-full"></img>
-            </div>
+      <div ref={containerRef} className="scroll-container">
+        <div className="scroll-section relative min-h-screen bg-black text-white">
+          {/* Your sections */}
 
-            {/* Content */}
-            <div className="relative z-10 w-full flex flex-col items-center">
-              {/* <div className="flex justify-center">
-                <div className="absolute -top-10 w-16 h-16 bg-black border-2 border-green-500 rounded-md flex items-center justify-center">
-                  <span className="text-green-500 font-bold">EQT</span>
-                </div>
-              </div> */}
-              <h1 id="heading" className="text-4xl md:text-7xl text-white/90 font-semibold mt-8">
-                <span className="label">Verify</span> <span className="label"> to</span> <span className="label">Trust </span> <span className="label">AI</span>
-              </h1>
-              <div className="md:w-[50%] w-[90%] self-center">
-                <p className="md:text-base text-xs mt-4">
-                  <span className="para">Easily find a photo's location with GeoSpy, the AI-powered
-                  tool for precise photo geolocation.</span><br/> <span className="para">Perfect for
-                  investigations, OSINT, and discovering where photos were
-                  taken.</span>
-                </p>
-              </div>
-              <button id="button" className="mt-8 px-6 py-2 bg-white text-black font-semibold rounded-xl shadow-lg hover:bg-gray-200 duration-200 text-nowrap" onClick={()=>navigate("/homeScreen")}>
-                <span className="buttonText md:text-base text-sm">Try GeoScope</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <section id="section2" className="min-h-[70vh]">
-          <div className="bg-black text-white py-10 px-5">
-            <h1 className="text-center text-2xl md:text-4xl font-semibold mb-10">
-              Verifiable Compute{" "}
-              <span className="text-emerald-400">Verifies</span>
-            </h1>
-            <div className="flex flex-col md:flex-row items-center justify-center md:gap-0 gap-3">
-              {/* Step 1 */}
-              <div className="flex flex-col items-center text-center">
-                <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
-                  <GoDatabase className="md:text-5xl text-3xl text-emerald-600 " />
-                </div>
-                <p className="mt-4 text-sm md:text-base">
-                  What data goes into <br /> an AI workflow
-                </p>
-              </div>
-              {/* Arrow */}
-
-              <div className="flex items-center justify-center">
-                {/*Line */}
-                <div className="h-[1px] w-36 bg-gradient-to-r from-black via-emerald-400/70 to-black relative md:mb-10 my-5"></div>
-
-                {/* Diamond Shape */}
-                <div className="absolute mx-2 md:mb-10">
-                  <div className="w-5 h-5 bg-transparent border-2 border-emerald-400/70 transform rotate-45 rounded-sm"></div>
-                </div>
+          <section
+            id="section1"
+            className="min-h-[100vh] w-full flex flex-col justify-center items-center"
+          >
+            {/* Section content */}
+            <div
+              className="h-[100vh] w-full relative flex flex-col items-center justify-center text-center px-4"
+              ref={backgroundRef}
+            >
+              {/* Background Glow */}
+              <div className="h-full w-full absolute top-1/2 transform -translate-y-1/2 left-0 right-0 flex justify-center">
+                <img src={landingPageImage} className="w-full h-full opacity-40 object-cover" alt="Background" />
               </div>
 
-              {/* Step 2 */}
-              <div className="flex flex-col items-center text-center">
-                <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
-                  <BsCpu className="md:text-5xl text-3xl text-emerald-600" />
-                </div>
-                <p className="mt-4 text-sm md:text-base">
-                  What code is run and where <br /> it is executed
-                </p>
-              </div>
-              {/* Arrow */}
-
-              <div className="flex items-center justify-center">
-                {/*  Line */}
-                <div className="h-[1px] w-36 bg-gradient-to-r from-black via-emerald-400/70 to-black relative  md:mb-10 my-5"></div>
-
-                {/* Diamond Shape */}
-                <div className="absolute mx-2  md:mb-10 ">
-                  <div className="w-5 h-5 bg-transparent border-2 border-emerald-400/70 transform rotate-45 rounded-sm"></div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="flex flex-col items-center text-center">
-                <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
-                  <IoMdFingerPrint className="md:text-5xl text-3xl text-emerald-600" />
-                </div>
-                <p className="mt-4 text-sm md:text-base">
-                  The output is genuine <br /> and secure
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="section3" className="min-h-[100vh] px-5 py-10 rounded-t-3xl bg-white flex flex-col items-center gap-12">
-          <div className=" text-center flex flex-col items-center">
-            {/* Label */}
-            <button className="inline-block px-4 py-1 border border-green-800 text-green-800 hover:bg-emerald-600 hover:text-white duration-200 font-medium rounded-full mb-6">
-              The Problem
-            </button>
-
-            {/* Heading */}
-            <div className=" self-center">
-              <h2 className="w-full text-3xl md:text-5xl font-semibold text-green-900">
-                New AI workflows <br /> equal
-                <span className="text-emerald-400"> New Threats</span>
-              </h2>
-            </div>
-
-            {/* Description */}
-            <p className="mt-4 text-emerald-600 leading-5 max-w-xl mx-auto">
-              Paragraph of text on Compromising AI Supply Chains. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-          <div className="xl:w-[80%] w-full min-h-[400px] flex md:flex-row flex-col items-center">
-            <div className="bg-black w-1/2 h-full rounded-s-3xl"></div>
-            <div className="bg-emerald-100 md:w-1/2 w-full h-full md:rounded-e-3xl md:rounded-es-none rounded-b-3xl lg:p-4 p-2">
-              <div className="w-full h-full p-5 flex flex-col gap-6">
-                <h1 className="text-3xl text-green-900 font-medium">
-                  The Problem
+              {/* Content */}
+              <div className="relative z-10 w-full flex flex-col items-center">
+                <h1
+                  id="heading"
+                  ref={headingRef}
+                  className="text-4xl w-[950px] md:text-7xl text-white/40 font-semibold mt-8"
+                >
+                  <span className="label">
+                    Uncover <span
+                      className="font-bold"
+                      style={{
+                        background: "linear-gradient(190deg, #ffffff, #059669)", // Gradient from white to #059669
+                        // background:"#059669",
+                        WebkitBackgroundClip: "text", // Clips the background to text
+                        WebkitTextFillColor: "transparent", // Makes the text transparent to show the gradient
+                      }}
+                    >
+                      The True Location
+                    </span> Behind Every Image
+                  </span>
                 </h1>
-                <div className="flex sm:flex-row flex-col justify-between text-green-900">
-                  <div className="space-y-5 text-[13.5px] font-semibold">
-                    <h1 className="flex items-center">
-                      <FaChevronRight />
-                      &nbsp; Inserting Backdoors in Ai Models
-                    </h1>
-                    <h1 className="flex items-center">
-                      <FaChevronRight />
-                      &nbsp; Extraction of AI Models and Data
-                    </h1>
-                    <h1 className="flex items-center">
-                      <FaChevronRight />
-                      &nbsp; Jailbreaks
-                    </h1>
-                    <h1 className="flex items-center">
-                      <FaChevronRight />
-                      &nbsp; Model DoS Attacks
-                    </h1>
-                    <div>
-                      <h1 className="flex items-center">
-                        <FaChevronRight />
-                        &nbsp; FinOps Attacks
-                      </h1>
-                      <p className="text-xs text-emerald-500 ms-3">
-                        (slowing performance, exhuasting token budgets)
-                      </p>
-                    </div>
-                  </div>
-                  <div className="space-y-5 text-[13.5px] font-semibold ">
-                    <h1 className="flex items-center">
-                      <FaChevronRight />
-                      &nbsp; Hallucination
-                    </h1>
-                    <h1 className="flex items-center">
-                      <FaChevronRight />
-                      &nbsp; Bias and Discrimination
-                    </h1>
-                    <h1 className="flex items-start">
-                      <FaChevronRight className="mt-1" />
-                      &nbsp; Toxicity, Aggression and Disinformation
-                    </h1>
-                    <h1 className="flex items-center">
-                      <FaChevronRight />
-                      &nbsp; Social Engineering
-                    </h1>
-                    <h1 className="flex items-center">
-                      <FaChevronRight />
-                      &nbsp; Misalignment
-                    </h1>
-                  </div>
+                <div className="md:w-[50%] w-[90%] self-center">
+                  <p ref={paraRef} className="md:text-base text-xs mt-4">
+                    <span className="para text-white/80">
+                      Geoscope’s AI platform transforms images into precise location
+                      insights. Using advanced image recognition, we extract
+                      geospatial data to pinpoint exact locations, from landmarks to
+                      hidden spots, enabling data-driven decisions. Every pixel
+                      reveals a new world!
+                    </span>
+                  </p>
                 </div>
-                <button className="w-40 px-5 py-2 text-sm rounded-lg bg-green-900 hover:bg-emerald-950 duration-200 flex items-center justify-between">
-                  View Solutions <IoIosArrowDown className="text-lg" />
+                <button
+                  id="button"
+                  ref={buttonRef}
+                  className="mt-8 px-6 py-2 bg-white text-black font-semibold rounded-xl shadow-lg hover:bg-gray-200 duration-200 text-nowrap"
+                  onClick={handleButtonClick}
+                >
+                  <span className="buttonText md:text-base text-sm">Try GeoScope</span>
                 </button>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+          <section id="section2" className="min-h-[70vh]">
+            {/* Section content */}
+            <div className="bg-black text-white py-10 px-5">
+              <h1 className="text-center text-2xl md:text-4xl font-semibold mb-10">
+                A Cornerstone of Trust In {" "}
+                <span className="text-emerald-400">AI Workflows</span>
+              </h1>
+              <div className="flex flex-col md:flex-row items-center justify-center md:gap-0 gap-3">
+                {/* Step 1 */}
+                <div className="flex flex-col items-center text-center">
+                  <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
+                    <GoDatabase className="md:text-5xl text-3xl text-emerald-600 " />
+                  </div>
+                  <p className="mt-4 text-sm md:text-base">
+                    Validating what data is integrated <br /> into every AI workflow.
+                  </p>
+                </div>
+                {/* Arrow */}
 
-        <section id="section4" className="min-h-[100vh] bg-white flex flex-col justify-center items-center space-y-10">
+                <div className="flex items-center justify-center">
+                  {/*Line */}
+                  <div className="h-[1px] w-36 bg-gradient-to-r from-black via-emerald-400/70 to-black relative md:mb-10 my-5"></div>
+
+                  {/* Diamond Shape */}
+                  <div className="absolute mx-2 md:mb-10">
+                    <div className="w-5 h-5 bg-transparent border-2 border-emerald-400/70 transform rotate-45 rounded-sm"></div>
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex flex-col items-center text-center">
+                  <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
+                    <BsCpu className="md:text-5xl text-3xl text-emerald-600" />
+                  </div>
+                  <p className="mt-4 text-sm md:text-base">
+                    Guaranteeing the accuracy of the code <br /> run and its execution environment
+                  </p>
+                </div>
+                {/* Arrow */}
+
+                <div className="flex items-center justify-center">
+                  {/*  Line */}
+                  <div className="h-[1px] w-36 bg-gradient-to-r from-black via-emerald-400/70 to-black relative  md:mb-10 my-5"></div>
+
+                  {/* Diamond Shape */}
+                  <div className="absolute mx-2  md:mb-10 ">
+                    <div className="w-5 h-5 bg-transparent border-2 border-emerald-400/70 transform rotate-45 rounded-sm"></div>
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="flex flex-col items-center text-center">
+                  <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
+                    <IoMdFingerPrint className="md:text-5xl text-3xl text-emerald-600" />
+                  </div>
+                  <p className="mt-4 text-sm md:text-base">
+                    Delivering outputs that are not only  genuine but <br /> safeguarded against tampering.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="section3" className="min-h-[100vh] px-5 py-10 rounded-t-3xl bg-white flex flex-col items-center gap-12">
+            {/* Section content */}
+            <div className=" text-center flex flex-col items-center">
+              {/* Label */}
+              <button className="inline-block px-4 py-1 border border-green-800 text-green-800 hover:bg-emerald-600 hover:text-white duration-200 font-bold rounded-full mb-6">
+                The Solution
+              </button>
+
+              {/* Heading */}
+              <div className=" self-center">
+                <h2 className="w-full text-3xl md:text-5xl font-semibold text-green-900">
+                  Discover Hidden Insights {" "} <br />
+                  <span className="text-emerald-400">with Geoscope</span>
+                </h2>
+              </div>
+
+              {/* Description */}
+              <p className="mt-4 text-emerald-600  leading-5 max-w-xl mx-auto">
+                Unlock the story behind every image. Geoscope harnesses the power of advanced image analysis and geolocation technology to generate detailed reports and accurately predict the location of any image.
+              </p>
+            </div>
+            <div className="xl:w-[80%] w-full min-h-[400px] flex gap-24 md:flex-row flex-col items-center">
+              <div className="bg-black w-1/2 h-[490px] overflow-hidden rounded-l-3xl">
+              <img src={SolutionImage} className="w-full h-full opacity-40 object-cover" alt="Background" />
+              </div>
+              <div className="bg-emerald-200 md:w-1/2 w-full h-full md:rounded-e-3xl md:rounded-es-none rounded-b-3xl lg:p-4 p-2">
+                <div className="w-full h-full p-5 flex flex-col gap-6">
+                  <h1 className="text-3xl text-green-900 font-medium">
+                    The Solution
+                  </h1>
+                  <div className="flex sm:flex-row flex-col justify-between text-green-900">
+                    <div className="space-y-5 text-[13.5px] font-semibold">
+                      <div>
+
+                        <h1 className="flex items-center text-lg">
+                          <FaChevronRight />
+                          &nbsp; Enhanced Accuracy
+                        </h1>
+                        <p className="text-xs text-emerald-500 ms-3">
+                        Our AI models are trained with massive datasets and updated regularly to ensure high-precision location predictions, often at the meter level.
+                        </p>
+                      </div> <div>
+
+                        <h1 className="flex items-center text-lg">
+                          <FaChevronRight />
+                          &nbsp; Robust Security
+                        </h1>
+                        <p className="text-xs text-emerald-500 ms-3">
+                        With secure encryption and constant monitoring, Geoscope safeguards your data from unauthorized access and malicious exploitation
+                        </p>
+                      </div> 
+                      <div>
+
+                        <h1 className="flex items-center text-lg">
+                          <FaChevronRight />
+                          &nbsp; Efficient Resource Management
+                        </h1>
+                        <p className="text-xs text-emerald-500 ms-3">
+                          With a streamlined interface and intuitive design, users of any expertise level can easily access and use Geoscope for their geolocation needs
+                        </p>
+                      </div>
+                      <div>
+                        <h1 className="flex items-center text-lg">
+                          <FaChevronRight />
+                          &nbsp; User-Centric Interface
+                        </h1>
+                        <p className="text-xs text-emerald-500 ms-3">
+                          With a streamlined interface and intuitive design, users of any expertise level can easily access and use Geoscope for their geolocation needs
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                  <button className="w-40 px-5 py-2 font-bold text-sm rounded-lg bg-emerald-900 hover:bg-emerald-950 duration-200 flex items-center justify-between">
+                    View Solutions <IoIosArrowDown className="text-lg" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <section
+          id="section4"
+          className="min-h-[100vh] bg-white flex flex-col justify-center items-center space-y-10"
+        >
           <div className=" text-center flex flex-col items-center">
             {/* Label */}
             <button className="inline-block px-4 py-1 border border-green-800 text-green-800 hover:bg-emerald-600 hover:text-white  duration-200 font-medium rounded-full mb-6">
-              Solutions
+            Get Started
             </button>
 
             {/* Heading */}
             <div className=" self-center">
               <h2 className="w-full text-3xl md:text-5xl font-semibold text-green-900">
-                Evalving trust for
+              Experience Geoscope 
                 <br />
-                <span className="text-emerald-400"> AI with</span>
+                <span className="text-emerald-400"> Today</span>
               </h2>
             </div>
           </div>
           <div className="w-full min-h-[350px] md:py-0 py-5 bg-emerald-900 flex md:flex-row flex-col items-center justify-center md:gap-16 gap-5">
-            <h1 className="md:text-5xl text-3xl text-green-400">Verifiable</h1>
-            <h1 className="text-4xl font-thin text-emerald-500 md:block hidden">|</h1>
-            <h1 className="text-4xl font-thin text-emerald-500 md:hidden block">—</h1>
+            <h1 className="md:text-5xl text-3xl text-green-400">Ready to Explore? <br /> Let's Try Something New!</h1>
+            <h1 className="text-4xl font-thin text-emerald-500 md:block hidden">
+              |
+            </h1>
+            <h1 className="text-4xl font-thin text-emerald-500 md:hidden block">
+              —
+            </h1>
             <div>
               <div className="flex flex-col gap-10">
                 <div>
-                  <h1 className="text-green-400 md:text-[28px] text-base">AI Trining and Inference</h1>
-                  <p className="text-gray-300 md:text-base text-xs " >Proof AI deployments are untampered</p>
+                  <h1 className="text-green-400 md:text-[28px] text-base">
+                  Upload Your Image
+                  </h1>
+                  <p className="text-gray-300 md:text-base text-xs ">
+                  Upload any image to our platform and get instant, precise geolocation results.
+                  </p>
                 </div>
 
                 <div>
-                  <h1 className="text-green-400 md:text-[28px] text-base">AI Privacy</h1>
-                  <p className="text-gray-300 md:text-base text-xs ">Proof AI models and data are confidential</p>
+                  <h1 className="text-green-400 md:text-[28px] text-base">
+                  Analyze & Explore
+                  </h1>
+                  <p className="text-gray-300 md:text-base text-xs ">
+                  Use our AI-powered insights for your business, research, or personal projects, <br /> and experience unmatched accuracy
+                  </p>
                 </div>
 
                 <div>
-                <h1 className="text-green-400 md:text-[28px] text-base">AI Safeguards</h1>
-                <p className="text-gray-300 md:text-base text-xs ">Proof AI gourdrails are implemented</p>
+                  <h1 className="text-green-400 md:text-[28px] text-base">
+                  Contact Us for Custom Solutions
+                  </h1>
+                  <p className="text-gray-300 md:text-base text-xs ">
+                  If you need tailored solutions for specific requirements, reach out to us for more <br /> information on custom packages.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Footer Section */}
       </div>
     </>
   );
