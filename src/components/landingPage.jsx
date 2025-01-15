@@ -97,7 +97,10 @@ function LandingPage() {
       },
     });
 
-
+    // Cleanup on component unmount
+  return () => {
+    scrollInstance.destroy();
+  };
   }, []);
 
   return (
