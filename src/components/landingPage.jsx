@@ -106,7 +106,7 @@ function LandingPage() {
   return (
     <>
       {/* <AnimatedText/> */}
-      <Navbar />
+      <Navbar />  
       <MouseCircle/>
 
       <div ref={containerRef} className="scroll-container">
@@ -132,7 +132,7 @@ function LandingPage() {
                 <h1
                   id="heading"
                   ref={headingRef}
-                  className="text-4xl w-[950px] md:text-7xl text-white/40 font-semibold mt-8"
+                  className=" lg:w-[950px] md:w-[700px] text-3xl md:text-5xl lg:text-7xl text-white/50 font-semibold mt-8"
                 >
                   <span className="label">
                     Uncover <span
@@ -162,7 +162,7 @@ function LandingPage() {
                 <button
                   id="button"
                   ref={buttonRef}
-                  className="mt-8 px-6 py-2 bg-white text-black font-semibold rounded-xl shadow-lg hover:bg-gray-200 duration-200 text-nowrap"
+                  className="mt-8 md:px-6 px-4 md:py-2 py-1 bg-white text-black font-semibold rounded-xl shadow-lg hover:bg-gray-200 duration-200 text-nowrap"
                   onClick={handleButtonClick}
                 >
                   <span className="buttonText md:text-base text-sm">Try GeoScope</span>
@@ -173,7 +173,7 @@ function LandingPage() {
           <section id="section2" className="min-h-[70vh]">
             {/* Section content */}
             <div className="bg-black text-white py-10 px-5">
-              <h1 className="text-center text-2xl md:text-4xl font-semibold mb-10">
+              <h1 className="text-center text-xl md:text-4xl font-semibold mb-10">
                 A Cornerstone of Trust In {" "}
                 <span className="text-emerald-400">AI Workflows</span>
               </h1>
@@ -183,7 +183,7 @@ function LandingPage() {
                   <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
                     <GoDatabase className="md:text-5xl text-3xl text-emerald-600 " />
                   </div>
-                  <p className="mt-4 text-sm md:text-base">
+                  <p className="mt-4 text-xs md:text-base">
                     Validating what data is integrated <br /> into every AI workflow.
                   </p>
                 </div>
@@ -194,7 +194,7 @@ function LandingPage() {
                   <div className="h-[1px] w-36 bg-gradient-to-r from-black via-emerald-400/70 to-black relative md:mb-10 my-5"></div>
 
                   {/* Diamond Shape */}
-                  <div className="absolute mx-2 md:mb-10">
+                  <div className="absolute mx-2 md:mb-5">
                     <div className="w-5 h-5 bg-transparent border-2 border-emerald-400/70 transform rotate-45 rounded-sm"></div>
                   </div>
                 </div>
@@ -204,7 +204,7 @@ function LandingPage() {
                   <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
                     <BsCpu className="md:text-5xl text-3xl text-emerald-600" />
                   </div>
-                  <p className="mt-4 text-sm md:text-base">
+                  <p className="mt-4 text-xs md:text-base ">
                     Guaranteeing the accuracy of the code <br /> run and its execution environment
                   </p>
                 </div>
@@ -215,7 +215,7 @@ function LandingPage() {
                   <div className="h-[1px] w-36 bg-gradient-to-r from-black via-emerald-400/70 to-black relative  md:mb-10 my-5"></div>
 
                   {/* Diamond Shape */}
-                  <div className="absolute mx-2  md:mb-10 ">
+                  <div className="absolute mx-2  md:mb-5 ">
                     <div className="w-5 h-5 bg-transparent border-2 border-emerald-400/70 transform rotate-45 rounded-sm"></div>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ function LandingPage() {
                   <div className="border border-emerald-500 bg-emerald-700/40 p-2 rounded-xl">
                     <IoMdFingerPrint className="md:text-5xl text-3xl text-emerald-600" />
                   </div>
-                  <p className="mt-4 text-sm md:text-base">
+                  <p className="mt-4 text-xs md:text-base">
                     Delivering outputs that are not only  genuine but <br /> safeguarded against tampering.
                   </p>
                 </div>
@@ -236,37 +236,37 @@ function LandingPage() {
             {/* Section content */}
             <div className=" text-center flex flex-col items-center">
               {/* Label */}
-              <button className="inline-block px-4 py-1 border border-green-800 text-green-800 hover:bg-emerald-600 hover:text-white duration-200 font-bold rounded-full mb-6">
+              <button className="inline-block px-4 py-1 border border-green-800 text-green-800 hover:bg-emerald-600 hover:text-white duration-200 sm:text-base text-xs font-bold rounded-full mb-6">
                 The Solution
               </button>
 
               {/* Heading */}
               <div className=" self-center">
-                <h2 className="w-full text-3xl md:text-5xl font-semibold text-green-900">
+                <h2 className="w-full text-2xl md:text-5xl  font-semibold text-green-900">
                   Discover Hidden Insights {" "} <br />
                   <span className="text-emerald-400">with Geoscope</span>
                 </h2>
               </div>
 
               {/* Description */}
-              <p className="mt-4 text-emerald-600  leading-5 max-w-xl mx-auto">
+              <p className="mt-4 text-emerald-600 sm:text-base text-xs leading-5 max-w-xl mx-auto">
                 Unlock the story behind every image. Geoscope harnesses the power of advanced image analysis and geolocation technology to generate detailed reports and accurately predict the location of any image.
               </p>
             </div>
-            <div className="xl:w-[80%] w-full min-h-[400px] flex gap-24 md:flex-row flex-col items-center">
-              <div className="bg-black w-1/2 h-[490px] overflow-hidden rounded-l-3xl">
-              <img src={SolutionImage} className="w-full h-full opacity-40 object-cover" alt="Background" />
+            <div className="xl:w-[80%] w-full md:h-[500px] h-auto  flex  md:flex-row flex-col items-center">
+              <div className="bg-black md:w-1/2 w-full md:h-[500px] h-[300px] overflow-hidden md:rounded-s-3xl md:rounded-t-none rounded-t-3xl">
+                <img src={SolutionImage} className="w-full h-full opacity-40 object-cover" alt="Background" />
               </div>
               <div className="bg-emerald-200 md:w-1/2 w-full h-full md:rounded-e-3xl md:rounded-es-none rounded-b-3xl lg:p-4 p-2">
-                <div className="w-full h-full p-5 flex flex-col gap-6">
-                  <h1 className="text-3xl text-green-900 font-medium">
+                <div className="w-full h-full sm:p-5 p-3 flex flex-col sm:gap-6 md:gap-3 gap-2">
+                  <h1 className="sm:text-3xl text-2xl text-green-900 font-medium">
                     The Solution
                   </h1>
                   <div className="flex sm:flex-row flex-col justify-between text-green-900">
                     <div className="space-y-5 text-[13.5px] font-semibold">
                       <div>
 
-                        <h1 className="flex items-center text-lg">
+                        <h1 className="flex items-center sm:text-lg text-base">
                           <FaChevronRight />
                           &nbsp; Enhanced Accuracy
                         </h1>
@@ -275,7 +275,7 @@ function LandingPage() {
                         </p>
                       </div> <div>
 
-                        <h1 className="flex items-center text-lg">
+                        <h1 className="flex items-center sm:text-lg text-base">
                           <FaChevronRight />
                           &nbsp; Robust Security
                         </h1>
@@ -285,7 +285,7 @@ function LandingPage() {
                       </div> 
                       <div>
 
-                        <h1 className="flex items-center text-lg">
+                        <h1 className="flex items-center sm:text-lg text-base">
                           <FaChevronRight />
                           &nbsp; Efficient Resource Management
                         </h1>
@@ -294,7 +294,7 @@ function LandingPage() {
                         </p>
                       </div>
                       <div>
-                        <h1 className="flex items-center text-lg">
+                        <h1 className="flex items-center sm:text-lg text-base">
                           <FaChevronRight />
                           &nbsp; User-Centric Interface
                         </h1>
@@ -305,8 +305,8 @@ function LandingPage() {
                     </div>
 
                   </div>
-                  <button className="w-40 px-5 py-2 font-bold text-sm rounded-lg bg-emerald-900 hover:bg-emerald-950 duration-200 flex items-center justify-between">
-                    View Solutions <IoIosArrowDown className="text-lg" />
+                  <button className="sm:w-40 w-32 sm:px-5 px-3 py-2 font-bold sm:text-sm text-xs rounded-lg bg-emerald-900 hover:bg-emerald-950 duration-200 flex items-center justify-between">
+                    View Solutions <IoIosArrowDown className="sm:text-lg text-base" />
                   </button>
                 </div>
               </div>
@@ -315,33 +315,33 @@ function LandingPage() {
         </div>
         <section
           id="section4"
-          className="min-h-[100vh] bg-white flex flex-col justify-center items-center space-y-10"
+          className="min-h-[100vh] bg-white flex flex-col justify-center items-center space-y-10 "
         >
           <div className=" text-center flex flex-col items-center">
             {/* Label */}
-            <button className="inline-block px-4 py-1 border border-green-800 text-green-800 hover:bg-emerald-600 hover:text-white  duration-200 font-medium rounded-full mb-6">
+            <button className="inline-block px-4 py-1 border border-green-800 text-green-800 hover:bg-emerald-600 hover:text-white duration-200 sm:text-base text-xs font-bold rounded-full mb-6">
             Get Started
             </button>
 
             {/* Heading */}
             <div className=" self-center">
-              <h2 className="w-full text-3xl md:text-5xl font-semibold text-green-900">
+              <h2 className="w-full text-2xl md:text-5xl font-semibold text-green-900">
               Experience Geoscope 
                 <br />
                 <span className="text-emerald-400"> Today</span>
               </h2>
             </div>
           </div>
-          <div className="w-full min-h-[350px] md:py-0 py-5 bg-emerald-900 flex md:flex-row flex-col items-center justify-center md:gap-16 gap-5">
-            <h1 className="md:text-5xl text-3xl text-green-400">Ready to Explore? <br /> Let's Try Something New!</h1>
+          <div className="w-full min-h-[350px] md:py-0 px-5 py-5 bg-emerald-900 flex md:flex-row flex-col items-center justify-center md:gap-16 gap-2">
+            <h1 className="md:text-5xl text-2xl text-green-400">Ready to Explore? <br /> Let's Try Something New!</h1>
             <h1 className="text-4xl font-thin text-emerald-500 md:block hidden">
               |
             </h1>
             <h1 className="text-4xl font-thin text-emerald-500 md:hidden block">
               —
             </h1>
-            <div>
-              <div className="flex flex-col gap-10">
+            <div className="py-3">
+              <div className="flex flex-col md:gap-10 gap-5 md:ms-0 ms-2">
                 <div>
                   <h1 className="text-green-400 md:text-[28px] text-base">
                   Upload Your Image

@@ -41,13 +41,13 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="flex justify-between w-full items-center px-8 py-4 text-white bg-[#030b09] sticky top-0 z-40"
+      className="flex justify-between w-full items-center px-8 py-4  text-white bg-[#030b09] fixed top-0 z-40"
     >
       <div ref={navLogoRef}>
-        <span className="text-2xl font-bold text-[rgb(5,150,105)]">Geo</span>
-        <span className="text-[15px]">Scope</span>
+        <span className="md:text-2xl text-xl font-bold text-[rgb(5,150,105)]">Geo</span>
+        <span className="md:text-[15px] text-[13px]">Scope</span>
       </div>
-      <div>
+      <div className="md:block hidden">
         <ul
           ref={navItemsRef}
           className="relative z-auto flex space-x-6 text-sm border-[2px] rounded-xl shadow-inner border-[#041b14] py-3 px-7"
@@ -60,7 +60,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div ref={navButtonRef} className="flex items-center gap-6">
-        <button onClick={()=>{navigator("/homeScreen")}} className="px-4 py-2 text-base bg-[#083124] font-medium text-[#cbdbd6] rounded-md hover:bg-[#0b3e2f]">
+        <button onClick={()=>{navigator("/homeScreen")}} className="md:px-4 px-2 md:py-2 py-1 md:text-base text-xs bg-[#083124] font-medium text-[#cbdbd6] rounded-md hover:bg-[#0b3e2f]">
           Let's Try
         </button>
       </div>
