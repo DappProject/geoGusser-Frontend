@@ -8,7 +8,7 @@ function MouseCircle() {
     const handleMouseMove = (e) => {
       const { pageX, pageY } = e;
 
-      // Move the blur circle
+      
       gsap.to(blurCircleRef.current, {
         x: pageX,
         y: pageY,

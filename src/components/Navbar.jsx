@@ -2,7 +2,8 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ scrollToSection, refs }) => {
+  const { overviewRef, technologyRef, testimonialsRef, resourcesRef } = refs;
 
   const navigator=useNavigate();
   const navRef = useRef(null);
@@ -11,7 +12,7 @@ const Navbar = () => {
   const navButtonRef = useRef(null);
 
   useEffect(() => {
-    const navItems = navRef.current.querySelector("ul"); // Select all `li` elements
+    const navItems = navRef.current.querySelector("ul");
 
     const tl = gsap.timeline();
     tl.fromTo(
@@ -28,20 +29,20 @@ const Navbar = () => {
         navItems,
         { opacity: 0, z: 50, transformPerspective: 1500 },
         { opacity: 1, z: 0, duration:2, ease: "power2.out" },
-        0 // Start at the same time as previous animation
+        0 
       )
       .fromTo(
         navButtonRef.current,
         { opacity: 0, z: 50, transformPerspective: 1500 },
         { opacity: 1, z: 0, duration: 3, ease: "power2.out" },
-        0 // Start at the same time as previous animations
+        0 
       );
   }, []);
 
   return (
     <nav
       ref={navRef}
-      className="flex justify-between w-[100vw] items-center px-8 py-4  text-white bg-[#030b09] fixed top-0 z-40"
+      className="flex justify-between w-[100vw] items-center px-8 py-4  text-white bg-[#030b09] fixed top-0 z-20"
     >
       <div ref={navLogoRef}>
         <span className="md:text-2xl text-xl font-bold text-[rgb(5,150,105)]">Geo</span>
@@ -50,13 +51,13 @@ const Navbar = () => {
       <div className="md:block hidden">
         <ul
           ref={navItemsRef}
-          className="relative z-auto flex space-x-6 text-sm border-[2px] rounded-xl shadow-inner border-[#041b14] py-3 px-7"
+          className="relative z-50 flex space-x-6 text-sm border-[2px] rounded-xl shadow-inner border-[#041b14] py-3 px-7"
         >
-          <div className="absolute inset-0 rounded-xl shadow-[inset_0_0_15px_1px_rgba(5,150,105,0.3)]"></div>
-          <li className="cursor-pointer text-base hover:text-[#083124]">Overview</li>
-          <li className="cursor-pointer text-base">Technology</li>
-          <li className="cursor-pointer text-base">Testimonials</li>
-          <li className="cursor-pointer text-base">Resources</li>
+          {/* <div className="absolute inset-0 rounded-xl shadow-[inset_0_0_15px_1px_rgba(5,150,105,0.3)]"></div> */}
+          <li onClick={(e) => {e.preventDefault(); scrollToSection(overviewRef)}} className=" text-base hover:text-[#0E5A45] duration-150 ease-in-out">Overview</li>
+          <li onClick={(e) => {e.preventDefault(); scrollToSection(technologyRef)}} className=" text-base hover:text-[#0E5A45] duration-150 ease-in-out">Technology</li>
+          <li onClick={(e) => {e.preventDefault(); scrollToSection(testimonialsRef)}} className=" text-base hover:text-[#0E5A45] duration-150 ease-in-out ">Testimonials</li>
+          <li  onClick={(e) => {e.preventDefault(); scrollToSection(resourcesRef)}} className=" text-base hover:text-[#0E5A45] duration-150 ease-in-out">Resources</li>
         </ul>
       </div>
       <div ref={navButtonRef} className="items-center flex">

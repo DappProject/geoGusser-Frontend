@@ -5,7 +5,6 @@ import axios from "axios";
 import { FaRegMap } from "react-icons/fa";
 import { MdOutlineStreetview } from "react-icons/md";
 import { Box, CircularProgress } from "@mui/material";
-import CustomMap from "./CustomMap.jsx";
 
 const Map = () => {
   const location = useLocation();
@@ -44,7 +43,7 @@ const Map = () => {
     e.preventDefault();
     setHighlight(false);
     const files = e.dataTransfer.files;
-    console.log(files); // Handle files as needed
+    console.log(files); 
     uploadFiles(files);
   };
 
@@ -161,8 +160,6 @@ const Map = () => {
           <iframe
             src={`https://www.google.com/maps/embed/v1/streetview?key=${"AIzaSyCITJsGKWFtOhyCmurW0ZmftmMTxHvPVz0"}&location=${streetViewUrl}&heading=${90}&pitch=${10}&fov=${80}`}
             title="Map View"
-            // width="600"
-            // height="400"
             className={`border-4 border-white absolute right-0 top-0 z-10 h-full md:w-[45%] block w-[100vw] ${
               isToggled && "hidden"
             }`}

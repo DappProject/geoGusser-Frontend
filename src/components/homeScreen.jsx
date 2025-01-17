@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import img from "../assets/img5.jpg";
 import axios from "axios";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { Box, CircularProgress } from "@mui/material";
 import sampleImage1 from "../assets/sampleImage1.jpeg"
 import sampleImage2 from "../assets/sampleImage2.jpg"
@@ -33,7 +32,7 @@ function HomeScreen() {
     e.stopPropagation();
     setHighlight(false);
 
-    const files = Array.from(e.dataTransfer.files); // Convert FileList to Array
+    const files = Array.from(e.dataTransfer.files);
     if (files.length) {
       console.log("Dropped files:", files);
       uploadFiles(files);
@@ -64,11 +63,9 @@ function HomeScreen() {
   const uploadFiles = async (files) => {
     setLoading(true);
     const formData = new FormData();
-    // If `file` is a single object, directly append it
     if (files instanceof File) {
       formData.append("file", files);
     } else if (Array.isArray(files)) {
-      // If `file` is an array, iterate and append each file
       files.forEach((f) => formData.append("file", f));
     } else {
       console.error("Invalid file format");
@@ -85,7 +82,7 @@ function HomeScreen() {
       });
       if (response) {
         setLoading(false);
-        const { mapsUrl, streetViewUrl, latitude, longitude, city, location } =
+        const { mapsUrl, streetViewUrl, latitude, longitude, location } =
           response.data;
 
         const imageUrl = `http://45.154.98.112:8000/public/${response.data.filePath.filename}`;
@@ -110,12 +107,7 @@ function HomeScreen() {
   return (
     <>
       <div className="h-screen w-full bg-black ">
-        {/* <img
-          src={img}
-          alt=""
-          className="h-full w-full object-cover cursor-pointer relative opacity-80"
-          draggable="false"
-        /> */}
+        
         <CustomMap/>
 
         <div className={`absolute z-20 inset-0 items-center justify-center bg-black bg-opacity-30 ${showModal ? "flex" : "hidden"}`}>

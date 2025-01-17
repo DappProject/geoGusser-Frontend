@@ -5,59 +5,59 @@ const CustomMap = () => {
 
   useEffect(() => {
     const map = new window.google.maps.Map(mapRef.current, {
-      center: { lat: 40.7128, lng: -74.0060 }, // Sacramento coordinates
+      center: { lat: 40.7128, lng: -74.0060 },
       zoom: 12,
       styles: [
         {
             elementType: "geometry",
-            stylers: [{ color: "#212121" }], // General dark background
+            stylers: [{ color: "#212121" }],
           },
           {
             elementType: "labels.text.stroke",
-            stylers: [{ color: "#212121" }], // Dark label background
+            stylers: [{ color: "#212121" }],
           },
           {
             elementType: "labels.text.fill",
-            stylers: [{ color: "#757575" }], // Muted label text color
+            stylers: [{ color: "#757575" }],
           },
           {
             featureType: "road",
             elementType: "geometry",
-            stylers: [{ color: "#38414e" }], // Dark road style
+            stylers: [{ color: "#38414e" }],
           },
           {
             featureType: "road",
             elementType: "geometry.stroke",
-            stylers: [{ color: "#212a37" }], // Dark road stroke
+            stylers: [{ color: "#212a37" }],
           },
           {
             featureType: "road",
             elementType: "labels",
-            stylers: [{ visibility: "off" }], // Removes road labels
+            stylers: [{ visibility: "off" }],
           },
           {
             featureType: "water",
             elementType: "geometry",
-            stylers: [{ color: "#0f172a" }], // Dark water style
+            stylers: [{ color: "#0f172a" }],
           },
           {
             featureType: "water",
             elementType: "labels",
-            stylers: [{ visibility: "on" }], // Removes water labels
+            stylers: [{ visibility: "on" }],
           },
           {
             featureType: "poi",
-            stylers: [{ visibility: "off" }], // Hides points of interest
+            stylers: [{ visibility: "off" }],
           },
           {
             featureType: "transit",
-            stylers: [{ visibility: "off" }], // Hides transit features
+            stylers: [{ visibility: "off" }],
           },
           {
             featureType: "administrative",
-            stylers: [{ visibility: "on" }], // Hides administrative boundaries
+            stylers: [{ visibility: "on" }],
           },
-      ], // Example dark theme
+      ],
     });
   }, []);
 

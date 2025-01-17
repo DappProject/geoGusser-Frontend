@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import landingPageImage from "../assets/landingPageImage.jpg";
 import SolutionImage from "../assets/bgimage.gif";
 import { GoDatabase } from "react-icons/go";
@@ -24,6 +24,15 @@ function LandingPage() {
   const buttonRef = useRef(null);
   const backgroundRef = useRef(null);
 
+  const overviewRef = useRef(null);
+  const technologyRef = useRef(null);
+  const testimonialsRef = useRef(null);
+  const resourcesRef = useRef(null);
+
+  const scrollToSection = (sectionRef) => {
+    sectionRef.current.scrollIntoView({ behavior: "smooth", block: "end",});
+  };
+
 
   useEffect(() => {
 
@@ -33,12 +42,12 @@ function LandingPage() {
       headingRef.current,
       {
         opacity: 0.5,
-        z: 450, // Start position in the Z-axis
-        transformPerspective: 1500, // Perspective for 3D effect
+        z: 450, 
+        transformPerspective: 1500,
       },
       {
         opacity: 1,
-        z: 0, // End position in the Z-axis
+        z: 0,
         duration: 2,
         ease: "power2.out",
         stagger: 0.2
@@ -47,20 +56,20 @@ function LandingPage() {
       paraRef.current,
       {
         opacity: 0,
-        y: 50, // Slight Y-axis movement
-        z: 150, // Start position in the Z-axis
+        y: 50,
+        z: 150,
         transformPerspective: 1000,
       },
       {
         opacity: 1,
-        y: 0, // End position in the Y-axis
-        z: 0, // End position in the Z-axis
+        y: 0, 
+        z: 0, 
         duration: 2,
         ease: "power2.out",
       },
-      "-=02" // Overlap the animations
+      "-=02"
     );
-    // Hover effect for the button
+    
     buttonRef.current.addEventListener("mouseenter", () => {
       gsap.to(buttonRef.current, { scale: 1.2, duration: 0.2 });
     });
@@ -69,7 +78,7 @@ function LandingPage() {
       gsap.to(buttonRef.current, { scale: 1, duration: 0.2 });
     });
 
-    // Cleanup event listeners
+    
   }, []);
 
   const handleButtonClick = () => {
@@ -105,16 +114,22 @@ function LandingPage() {
 
   return (
     <>
-      {/* <AnimatedText/> */}
-      <Navbar />  
+      
+      <Navbar scrollToSection={scrollToSection} refs={{ 
+        overviewRef, 
+        technologyRef, 
+        testimonialsRef, 
+        resourcesRef 
+      }} />
       <MouseCircle/>
 
       <div ref={containerRef} className="scroll-container">
-        <div className="scroll-section relative min-h-screen bg-black text-white">
-          {/* Your sections */}
+        <div className="scroll-section relative h-fit bg-black text-white">
+          
 
           <section
-            id="section1"
+          ref={overviewRef} 
+            id="overview"
             className="min-h-[100vh] w-full flex flex-col justify-center items-center"
           >
             {/* Section content */}
@@ -139,9 +154,9 @@ function LandingPage() {
                       className="font-bold"
                       style={{
                         background: "linear-gradient(190deg, #ffffff, #059669)", // Gradient from white to #059669
-                        // background:"#059669",
-                        WebkitBackgroundClip: "text", // Clips the background to text
-                        WebkitTextFillColor: "transparent", // Makes the text transparent to show the gradient
+                        
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
                       }}
                     >
                       The True Location
@@ -170,7 +185,7 @@ function LandingPage() {
               </div>
             </div>
           </section>
-          <section id="section2" className="min-h-[70vh]">
+          <section  ref={technologyRef} id="technology" className="scroll-mt-52 min-h-[70vh]">
             {/* Section content */}
             <div className="bg-black text-white py-10 px-5">
               <h1 className="text-center text-xl md:text-4xl font-semibold mb-10">
@@ -232,7 +247,7 @@ function LandingPage() {
               </div>
             </div>
           </section>
-          <section id="section3" className="min-h-[100vh] px-5 py-10 rounded-t-3xl bg-white flex flex-col items-center gap-12">
+          <section ref={testimonialsRef} id="testimonials" className="min-h-[100vh] px-5 py-10 rounded-t-3xl bg-white flex flex-col items-center gap-12">
             {/* Section content */}
             <div className=" text-center flex flex-col items-center">
               {/* Label */}
@@ -312,10 +327,10 @@ function LandingPage() {
               </div>
             </div>
           </section>
-        </div>
         <section
-          id="section4"
-          className="min-h-[100vh] bg-white flex flex-col justify-center items-center space-y-10 "
+        ref={resourcesRef}
+          id="resources"
+          className="h-auto py-10 bg-black flex flex-col justify-center items-center space-y-10 "
         >
           <div className=" text-center flex flex-col items-center">
             {/* Label */}
@@ -372,6 +387,7 @@ function LandingPage() {
             </div>
           </div>
         </section>
+        </div>
       </div>
     </>
   );
