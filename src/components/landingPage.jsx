@@ -330,7 +330,7 @@ function LandingPage() {
         <section
         ref={resourcesRef}
           id="resources"
-          className="h-auto py-10 bg-black flex flex-col justify-center items-center space-y-10 "
+          className="h-auto py-10 flex flex-col bg-white justify-center items-center space-y-10 "
         >
           <div className=" text-center flex flex-col items-center">
             {/* Label */}
