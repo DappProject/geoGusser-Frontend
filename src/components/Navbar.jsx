@@ -51,13 +51,13 @@ const Navbar = ({ scrollToSection, refs }) => {
       <div className="md:block hidden">
         <ul
           ref={navItemsRef}
-          className="relative z-50 flex space-x-6 text-sm border-[2px] rounded-xl shadow-inner border-[#041b14] py-3 px-7"
+          className="relative z-50 flex text-sm border-[2px] rounded-xl shadow-inner border-[#041b14] py-3 px-7"
         >
           {/* <div className="absolute inset-0 rounded-xl shadow-[inset_0_0_15px_1px_rgba(5,150,105,0.3)]"></div> */}
-          <li onClick={(e) => {e.preventDefault(); scrollToSection(overviewRef)}} className=" text-base hover:text-[#0E5A45] duration-150 ease-in-out">Overview</li>
-          <li onClick={(e) => {e.preventDefault(); scrollToSection(technologyRef)}} className=" text-base hover:text-[#0E5A45] duration-150 ease-in-out">Technology</li>
-          <li onClick={(e) => {e.preventDefault(); scrollToSection(testimonialsRef)}} className=" text-base hover:text-[#0E5A45] duration-150 ease-in-out ">Testimonials</li>
-          <li  onClick={(e) => {e.preventDefault(); scrollToSection(resourcesRef)}} className=" text-base hover:text-[#0E5A45] duration-150 ease-in-out">Resources</li>
+          <li onClick={(e) => {e.preventDefault(); scrollToSection(overviewRef)}} className=" text-base px-3 cursor-pointer hover:text-[#0E5A45] duration-150 ease-in-out">Overview</li>
+          <li onClick={(e) => {e.preventDefault(); scrollToSection(technologyRef)}} className=" text-base px-3 cursor-pointer hover:text-[#0E5A45] duration-150 ease-in-out">Technology</li>
+          <li onClick={(e) => {e.preventDefault(); scrollToSection(testimonialsRef)}} className=" text-base px-3 cursor-pointer hover:text-[#0E5A45] duration-150 ease-in-out ">Testimonials</li>
+          <li  onClick={(e) => {e.preventDefault(); scrollToSection(resourcesRef)}} className=" text-base px-3 cursor-pointer hover:text-[#0E5A45] duration-150 ease-in-out">Resources</li>
         </ul>
       </div>
       <div ref={navButtonRef} className="items-center flex">
